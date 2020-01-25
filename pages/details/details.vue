@@ -24,10 +24,10 @@
 				</view>
 				<!-- <Info :detail="details"></Info> -->
 			</swiper-item>
-			<swiper-item class="item-wrap">
+			<swiper-item class="item-wrap" v-if="details && details.files">
 				<view class="item-wrap">
-					<swiper class="swiper" v-if="details.files.length > 0" :style="{height: '100vh'}">
-						<swiper-item v-for="(item,index) in details.files" :style="{textAlign: 'center'}">
+					<swiper class="swiper" v-if="details.files && details.files.length > 0" :style="{height: '100vh'}">
+						<swiper-item v-for="(item, index) in details.files" :key="index" :style="{textAlign: 'center'}">
 							<image :src="item" class="item-img" mode="widthFix"></image>
 						</swiper-item>	
 					</swiper>
