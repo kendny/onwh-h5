@@ -24,7 +24,7 @@
 				</view>
 				<!-- <Info :detail="details"></Info> -->
 			</swiper-item>
-			<swiper-item class="item-wrap">
+			<swiper-item class="item-wrap" v-if="details.files">
 				<view class="item-wrap">
 					<swiper class="swiper" v-if="details.files.length > 0" :style="{height: '100vh'}">
 						<swiper-item v-for="(item,index) in details.files" :style="{textAlign: 'center'}">
