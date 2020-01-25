@@ -1,4 +1,4 @@
-import api from '@/common/api/api.js'
+import api from '@/utils/api/api.js'
 
 module.exports = {
 	max:function(n1, n2) {
