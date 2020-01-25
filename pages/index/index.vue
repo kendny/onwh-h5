@@ -155,7 +155,7 @@
 					start: index
 				}
 				
-				that.$api.getDemandList('demand/', data)
+				that.$api.getDemandList(data)
 					.then(res => {
 						if (this.list.length == res.data.total) {
 							// finish(boolean:是否显示finishText,默认显示)
