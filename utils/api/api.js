@@ -10,5 +10,8 @@ export default {
 			return http.get(`demand/`+params.id + '/')
 		}
 	},
+	getDemandList: params => {
+		return http.get(`demand/`, params)
+	}
   
 }
