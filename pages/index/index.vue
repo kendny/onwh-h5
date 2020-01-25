@@ -5,7 +5,7 @@
 				<view class="swiper-item" v-for="(item,index) in list" :key="index" v-if="list.length > 0">
 					<view class="item-top">
 						<view class="top-left">
-							<image class="item-avatar" :src="item.logo" mode="widthFix"></image>
+							<image class="item-avatar" :src="item.logo? item.logo:'/static/logo.png'" mode="widthFix"></image>
 							<view class="left-box">
 								<text class="item-name" v-text="item.company"></text>
 								<text class="item-sex">{{item.createTime ? item.createTime : '2020-01-24 19:00'}} 来源：{{item.source}}</text>

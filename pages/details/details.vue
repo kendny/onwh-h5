@@ -78,7 +78,7 @@
 			},
 			loadDetail(id) {
 				let that = this;
-				Request.doInvoke('demand/' + id, 'GET')
+				that.$api.getDemandDetail('demand/' + id, 'GET')
 					.then(res => {
 						if (res.code === '10000') {
 							that.details = res.data
