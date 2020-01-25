@@ -20,7 +20,8 @@
 						<view class="item-content">
 							<view class="item-wuzi flex-between" v-for="(child,idx) in item.details" :key="idx">
 								<text>{{child.name}}</text>
-								<text>{{child.amount}} / {{child.unit}}</text>
+								<text v-if="child.amount > 0">{{child.amount}} / {{child.unit}}</text>
+								<text v-else>不限</text>
 							</view>
 						</view>
 					</view>
