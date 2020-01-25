@@ -68,8 +68,10 @@ http.interceptor.response((response) => {
     /* 请求之后的响应拦截,对响应状态进行判断 */
     let statusCode = response.statusCode
     if (statusCode == constant.SUCCESS_CODE) {
-        console.log(response)
-        return response
+		if(response.data) {
+			return response.data
+		}
+        
     } else {
         //todo... 对初出错的响应进行处理
     }

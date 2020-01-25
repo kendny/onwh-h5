@@ -150,13 +150,14 @@
 			},
 			loadData(pullScroll, index) {
 				let that = this;
-				let data = {
+				let params = {
 					pageSize: 10,
 					start: index
 				}
 				
-				that.$api.getDemandList(data)
+				that.$api.getDemandList(params)
 					.then(res => {
+						console.log("res:===", res)
 						if (this.list.length == res.data.total) {
 							// finish(boolean:是否显示finishText,默认显示)
 							pullScroll.finish(this.list.length > 5);

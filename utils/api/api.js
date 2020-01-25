@@ -7,11 +7,11 @@ let host = config.HOST
 export default {
 	getDemandDetail: params => {
 		if(params.id){
-			return http.get(`demand/`+params.id + '/')
+			return http.get(`${host}demand/`+params.id + '/')
 		}
 	},
 	getDemandList: params => {
-		return http.get(`demand/`, params)
+		return http.get(`${host}demand/`, params)
 	}
   
 }
