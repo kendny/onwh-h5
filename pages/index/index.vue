@@ -5,7 +5,7 @@
 				<view class="swiper-item" v-for="(item,index) in list" :key="index" v-if="list.length > 0">
 					<view class="item-top">
 						<view class="top-left">
-							<image class="item-avatar" :src="item.logo" mode="widthFix"></image>
+							<image class="item-avatar" :src="item.logo? item.logo:'/static/logo.png'" mode="widthFix"></image>
 							<view class="left-box">
 								<text class="item-name" v-text="item.company"></text>
 								<text class="item-sex">{{item.createTime ? item.createTime : '2020-01-24 19:00'}} 来源：{{item.source}}</text>
@@ -150,12 +150,14 @@
 			},
 			loadData(pullScroll, index) {
 				let that = this;
-				let data = {
+				let params = {
 					pageSize: 10,
 					start: index
 				}
-				Request.doInvoke('demand', 'GET', data)
+				
+				that.$api.getDemandList(params)
 					.then(res => {
+						console.log("res:===", res)
 						if (this.list.length == res.data.total) {
 							// finish(boolean:是否显示finishText,默认显示)
 							pullScroll.finish(this.list.length > 5);
@@ -166,6 +168,19 @@
 					}).catch(err => {
 						console.log(err)
 					})
+				
+				// Request.doInvoke('demand', 'GET', data)
+				// 	.then(res => {
+				// 		if (this.list.length == res.data.total) {
+				// 			// finish(boolean:是否显示finishText,默认显示)
+				// 			pullScroll.finish(this.list.length > 5);
+				// 		} else {
+				// 			pullScroll.success();
+				// 			that.list = that.list.concat(res.data.list)
+				// 		}
+				// 	}).catch(err => {
+				// 		console.log(err)
+				// 	})
 			}
 		},
 		computed: {
