@@ -59,11 +59,13 @@
 					title: '防护物资标准',
 					hasRed: false,
 					num: 99
-				}, {
-					title: '图片信息',
-					hasRed: false,
-					num: 99
-				}]
+				}
+				// , {
+				// 	title: '图片信息',
+				// 	hasRed: false,
+				// 	num: 99
+				// },
+				]
 			}
 		},
 		components: {
