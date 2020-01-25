@@ -154,6 +154,20 @@
 					pageSize: 10,
 					start: index
 				}
+				
+				// that.$api.getDemandDetail('demand/', data)
+				// 	.then(res => {
+				// 		if (this.list.length == res.data.total) {
+				// 			// finish(boolean:是否显示finishText,默认显示)
+				// 			pullScroll.finish(this.list.length > 5);
+				// 		} else {
+				// 			pullScroll.success();
+				// 			that.list = that.list.concat(res.data.list)
+				// 		}
+				// 	}).catch(err => {
+				// 		console.log(err)
+				// 	})
+				
 				Request.doInvoke('demand', 'GET', data)
 					.then(res => {
 						if (this.list.length == res.data.total) {

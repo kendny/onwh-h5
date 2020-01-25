@@ -78,7 +78,11 @@
 			},
 			loadDetail(id) {
 				let that = this;
-				that.$api.getDemandDetail('demand/' + id, 'GET')
+				let params = {
+					'id': id
+				}
+
+				that.$api.getDemandDetail(params)
 					.then(res => {
 						if (res.code === '10000') {
 							that.details = res.data

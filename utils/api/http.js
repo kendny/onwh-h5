@@ -9,8 +9,12 @@ const http = new Request()
 http.setConfig((config) => {
     config.baseUrl = HOST
     config.isLoading = config.isLoading || false
+	let token = uni.getStorageSync('token');
+	
     config.header = {
-        ...config.header
+        ...config.header,
+		'content-type': 'application/json',
+		'accessToken': token || undefined
     }
 
     return config

@@ -6,7 +6,9 @@ import config from '@/utils/config.js'
 let host = config.HOST
 export default {
 	getDemandDetail: params => {
-		return http.get(`demand/`, params)
+		if(params.id){
+			return http.get(`demand/`+params.id + '/')
+		}
 	},
   
 }
