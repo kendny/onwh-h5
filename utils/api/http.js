@@ -14,7 +14,7 @@ http.setConfig((config) => {
     config.header = {
         ...config.header,
 		'content-type': 'application/json',
-		'accessToken': token || undefined
+		'accessToken': undefined
     }
 
     return config

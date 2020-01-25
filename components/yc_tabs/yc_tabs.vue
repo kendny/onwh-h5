@@ -120,7 +120,7 @@
 		display: flex;
 		background: #fff;
 		font-size: 28upx;
-		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+		// box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
 		position: relative;
 		z-index: 10;
 		overflow: hidden;
@@ -142,9 +142,9 @@
 					display: inline-block;
 					text-align: center;
 					padding: 0 30upx;
-					height: 108upx;
-					line-height: 108upx;
-					font-family: PingFangHK-Medium;
+					height: 80upx;
+					line-height: 80upx;
+					font-family: PingFangSC-Semibold;
 					font-size: 32upx;
 					color: #666;
 
