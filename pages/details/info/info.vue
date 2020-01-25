@@ -107,24 +107,24 @@
 
         .info-content {
             font-family: PingFangSC-Semibold;
-            padding: 20upx;
+            padding: 0 20upx 20upx 20upx;
             background-color: #FFFFFF;
 
             .main-box {
                 display: flex;
                 justify-content: space-between;
-
+                align-items: flex-end;
                 .btn-donate {
                     width: 200upx;
                     background: #FFC936;
                     border-radius: 0 0 4px 4px;
-                    font-size: 12px;
+                    font-size: 24upx;
                     color: #FFFFFF;
                 }
             }
 
             .main-text {
-                font-size: 28upx;
+                font-size: 32upx;
                 color: #333333;
                 line-height: 50upx;
                 display: block;
