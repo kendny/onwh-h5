@@ -5,6 +5,7 @@
             <tabs ref="tab" :tabData="tabList" :defaultIndex="current" @tabClick='tabClick'></tabs>
         </view>
         <swiper class="swiper" :current="current" @change="tabClick" :style="{height: '60vh'}">
+            <!-- 需求物资清单 -->
             <swiper-item>
                 <view class="item-wrap">
                     <view class="item-wuzi flex-between" v-for="(child,idx) in details.details" :key="idx">
@@ -14,6 +15,7 @@
                     </view>
                 </view>
             </swiper-item>
+            <!-- 防护物资标准 -->
             <swiper-item>
                 <view class="item-wrap">
                     <view class="item-wuzi flex-between" v-for="(child,idx) in details.details" :key="idx">
@@ -22,6 +24,7 @@
                     </view>
                 </view>
             </swiper-item>
+            <!-- 物资运输方式 -->
             <swiper-item class="item-wraps">
                 <!-- <swiper class="swiper" v-if="details.files && details.files.length > 0" :style="{height: '100vh'}">
 						<swiper-item v-for="(item,index) in details.files" :style="{textAlign: 'center'}">
@@ -94,6 +97,7 @@
                     num: 99
                 }],
                 files: [{
+                    // 接口文档暂无数据，因此使用静态模拟数据
                     Hospital: '接受第三方物流直接快递到医院',
                     company1: '京东快递',
                     company2: '顺丰快递',
@@ -121,7 +125,6 @@
                     }
                 });
                 clipboard.on('success', function(e) { //复制成功执行的回调，可选
-                    console.log(e);
                     uni.showToast({
                         title: '地址复制成功',
                         icon: 'none',
