@@ -66,6 +66,7 @@
 					</swiper-item>
 				</swiper>
 				<view class="main-text" style="text-align: center;" v-else>暂无内容</view>
+
 			</swiper-item>
 		</swiper>
 	</view>
