@@ -243,8 +243,14 @@
 						} else if (res.tapIndex == 1) {
 							this.copyPhone();
 						} else if (res.tapIndex == 2) {
+							uni.navigateTo({
+								url: '/pages/addhospital/addhospital'
+							})
 							console.log('补充医院页面')
 						} else if (res.tapIndex == 3) {
+							uni.navigateTo({
+								url: '/pages/addcar/addcar'
+							})
 							console.log('补充车队页面')
 						}
 					},
