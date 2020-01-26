@@ -5,6 +5,7 @@ node_modules
 dist
 .vscode
 .idea
+unpackage
 
 # misc
 .DS_Store
