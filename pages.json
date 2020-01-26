@@ -8,6 +8,11 @@
 		},
 		{
 			"path": "pages/details/details"
+		},{
+			"path":"pages/onlineAdd/cars",
+			"style": {
+				"navigationBarTitleText": "在线补充车辆信息"
+			}
 		}
 	],
 	"globalStyle": {
