@@ -11,14 +11,12 @@
 			"style": {
 				"navigationBarTitleText": "物资需求详情"
 			}
-		}
-	    ,{
+		},{
             "path" : "pages/addcar/addcar",
             "style" : {
 				"navigationBarTitleText": "补充车辆"
 			}
-        }
-        ,{
+        },{
             "path" : "pages/addhospital/addhospital",
             "style" : {
 				"navigationBarTitleText": "补充医院"

@@ -1,8 +1,7 @@
 <template>
     <view class="info">
-        <view class="info-title">
-            <svg width="10px" height="18px" viewBox="0 0 10 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
+        <view class="info-title" @tap="goBack">
+            <svg width="10px" height="18px" viewBox="0 0 10 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
                 <title>返回</title>
                 <desc>Created with Sketch.</desc>
@@ -21,13 +20,14 @@
             <view class="main-box">
                 <text class="main-text">{{detail.company}}</text>
                 <view>
-                    <button type="default" class="btn-donate" @tap="doSomething">接受个人捐赠</button>
+                    <button type="default" v-if="detail.type === '0'" class="btn-donate">接受个人捐赠</button>
+                    <button type="default" v-else class="btn-nodonate">不接受个人捐赠</button>
                 </view>
             </view>
             <view class="info-box">
-                <text class="main-time">{{detail.time || '2020-01-26 02:03'}}</text>
+                <text class="main-time">{{detail.createTime}}</text>
                 <view class="touch-box">
-                    <text class="come-text" @tap="toOut(detail.sourceUrl)">来源：官方微博</text>
+                    <text class="come-text" @tap="toOut(detail.sourceUrl)">来源：{{detail.source}}</text>
                     <svg width="10px" height="18px" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>返回</title>
@@ -51,6 +51,9 @@
                     <button type="default" size="mini" @tap="callSomeOne(detail.contacts[0].phone)">联系医院</button>
                 </view>
             </view>
+        </view>
+        <view class="item-redCross" v-if="detail.type !== '0'">
+            <button type="primary" @tap="callSomeOne('027-87327533')">联系红十字会</button>
         </view>
     </view>
 </template>
@@ -76,8 +79,8 @@
             toOut(url) {
                 if (url) window.location.replace(url);
             },
-            doSomething() {
-                console.log(this.detail)
+            goBack(){
+                uni.navigateTo({url: '/pages/index/index'})
             }
         }
     }
@@ -115,8 +118,21 @@
                 justify-content: space-between;
                 align-items: flex-end;
                 .btn-donate {
-                    width: 200upx;
+                    width: 188upx;
+                    height: 60upx;
+                    padding: 0;
+                    line-height: 60upx;
                     background: #FFC936;
+                    border-radius: 0 0 4px 4px;
+                    font-size: 24upx;
+                    color: #FFFFFF;
+                }
+                .btn-nodonate {
+                    padding: 0;
+                    width: 188upx;
+                    height: 60upx;
+                    line-height: 60upx;
+                    background: #999999;
                     border-radius: 0 0 4px 4px;
                     font-size: 24upx;
                     color: #FFFFFF;
@@ -176,6 +192,16 @@
                     font-size: 28upx;
                     color: #80ADED;
                 }
+            }
+        }
+        .item-redCross {
+            padding: 20upx;
+            background-color: #FFFFFF;
+            button {
+                background-color: #80ADED;
+                height: 74upx;
+                line-height: 74upx;
+                border-radius: 4upx;
             }
         }
     }

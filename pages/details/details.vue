@@ -4,7 +4,7 @@
         <view class="detail-head">
             <tabs ref="tab" :tabData="tabList" :defaultIndex="current" @tabClick='tabClick'></tabs>
         </view>
-        <swiper class="swiper" :current="current" @change="tabClick" :style="{height: '60vh'}">
+        <swiper class="swiper" :current="current" @change="tabClick" :style="{minHeight: '51vh'}">
             <!-- 需求物资清单 -->
             <swiper-item>
                 <view class="item-wrap">
@@ -25,47 +25,42 @@
                 </view>
             </swiper-item>
             <!-- 物资运输方式 -->
-            <swiper-item class="item-wraps">
-                <!-- <swiper class="swiper" v-if="details.files && details.files.length > 0" :style="{height: '100vh'}">
-						<swiper-item v-for="(item,index) in details.files" :style="{textAlign: 'center'}">
-							<image :src="item" class="item-img" mode="widthFix"></image>
-						</swiper-item>	
-					</swiper> -->
-                <swiper v-if="files.length > 0" :style="{height: '600upx'}">
-                    <swiper-item v-for="(item,index) in files">
+            <swiper-item class="item-wraps" v-if="details.receiptInfo">
+                <swiper :style="{height: '600upx'}">
+                    <swiper-item>
                         <view class="item-box">
-                            <text class="title">{{item.Hospital}}</text>
+                            <text class="title">{{details.receiptInfo.dockingAddress}}</text>
                             <view class="btns-box">
                                 <view>
-                                    <button type="default" class="btn-address" size="mini">{{item.company1}}</button>
-                                    <button type="default" class="btn-address" size="mini">{{item.company2}}</button>
+                                    <button type="default" class="btn-address" size="mini">{{details.receiptInfo.company1}}</button>
+                                    <button type="default" class="btn-address" size="mini">{{details.receiptInfo.company2}}</button>
                                 </view>
                                 <view>
-                                    <button type="default" class="copy" size="mini" @tap="copyAddress(item.address)">复制快递地址</button>
+                                    <button type="default" class="copy" size="mini" @tap="copyAddress(details.receiptInfo.street)">复制快递地址</button>
                                 </view>
                             </view>
                             <view class="text-address">快递地址：</view>
-                            <text class="text-address">{{item.address}}</text>
+                            <text class="text-address">{{details.receiptInfo.street}}</text>
                             <view class="touch-info">
-                                <text>收件人：{{item.person}}</text>
-                                <text>电话：{{item.phone}}</text>
+                                <text>收件人：{{details.receiptInfo.name}}</text>
+                                <text>电话：{{details.receiptInfo.phone}}</text>
                             </view>
                         </view>
                         <view class="item-box">
                             <view class="btns-box">
-                                <text class="title">{{item.type}}</text>
+                                <text class="title">{{details.receiptInfo.dockingAddress}}</text>
                                 <view>
-                                    <button type="default" class="call-phone" size="mini" @tap="callSomeOne(item.phone)">点击拨打电话</button>
+                                    <button type="default" class="call-phone" size="mini" @tap="callSomeOne(details.receiptInfo.phone)">点击拨打电话</button>
                                 </view>
                             </view>
                             <view class="touch-info">
-                                <text>收件人：{{item.person}}</text>
-                                <text>电话：{{item.phone}}</text>
+                                <text>收件人：{{details.receiptInfo.dockinger}}</text>
+                                <text>电话：{{details.receiptInfo.phone}}</text>
                             </view>
                         </view>
                     </swiper-item>
                 </swiper>
-                <view class="main-text" style="text-align: center;" v-else>暂无内容</view>
+                <!-- <view class="main-text" style="text-align: center;" v-else>暂无内容</view> -->
             </swiper-item>
         </swiper>
     </view>
@@ -85,14 +80,17 @@
                 current: 0,
                 tabList: [{
                     title: '需求物资清单',
+                    isShow: true,
                     hasRed: false,
                     num: '99+'
                 }, {
                     title: '防护物资标准',
+                    isShow: true,
                     hasRed: false,
                     num: 99
                 }, {
                     title: '物资运输方式',
+                    isShow: true,
                     hasRed: false,
                     num: 99
                 }],
@@ -142,9 +140,9 @@
             },
             // 打电话功能
             callSomeOne(phone) {
-            	uni.makePhoneCall({
-            		phoneNumber: phone //仅为示例
-            	});
+                uni.makePhoneCall({
+                    phoneNumber: phone //仅为示例
+                });
             },
             tabClick(e) {
                 let current = typeof e === 'object' ? e.detail.current : e;
@@ -161,6 +159,9 @@
                     .then(res => {
                         if (res.code === '10000') {
                             that.details = res.data
+                            if (!that.details.receiptInfo) {
+                                that.tabList[2].isShow = false
+                            }
                         }
                     }).catch(err => {
                         console.log(err)
@@ -176,21 +177,25 @@
 <style lang="less" scoped>
     .detail-wrap {
         background-color: #EDEDED;
+
         .detail-head {
             border-bottom: 1px solid #C0C0C0;
         }
     }
+
     .item-wraps {
         box-sizing: border-box;
         background-color: #FFFFFF;
         padding: 20upx 20upx;
     }
+
     .item-wrap {
         box-sizing: border-box;
         background-color: #FFFFFF;
         padding: 0 20upx;
     }
-    .swiper{
+
+    .swiper {
         background-color: #FFFFFF;
     }
 
@@ -198,7 +203,7 @@
         display: flex;
         align-items: center;
         border-bottom: 1upx solid #f2f2f2;
-        font-family:  PingFangSC-Semibold;
+        font-family: PingFangSC-Semibold;
         font-size: 24upx;
         color: #333333;
         height: 72upx;
@@ -216,6 +221,7 @@
         padding: 20upx 20upx;
         color: #333333;
         margin-bottom: 20upx;
+
         .title {
             margin-bottom: 7upx;
             display: block;
@@ -263,11 +269,15 @@
                 margin-right: 84upx;
             }
         }
-        .call-phone{
+
+        .call-phone {
             background: #FFFFFF;
             border: 1px solid #80ADED;
             border-radius: 50upx;
             color: #80ADED;
+        }
+        uni-button:after {
+            border: none;
         }
     }
 
@@ -275,4 +285,5 @@
         width: 80%;
         margin: 0 auto;
     }
+
 </style>

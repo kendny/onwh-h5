@@ -153,14 +153,13 @@
 				    return;
 				}
 				_that.$api.postCarInfo(_that.postInfo).then(res => {
-					console.log(res)
-					if(res.code == 1000){
+					if(res.code == 10000){
 						uni.showModal({
 						    title: '提示消息',
 						    content: "感谢您为抗击肺炎所做贡献！",
 						    showCancel: false,
 						    success(res) {
-								alert('22')
+								
 						        uni.navigateBack({
 						        	delta: 1,
 						        	animationType: 'pop-out',
