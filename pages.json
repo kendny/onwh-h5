@@ -3,24 +3,32 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "湖北医疗物资需求平台"
+				"navigationBarTitleText": "武汉物资信息"
 			}
 		},
 		{
-			"path": "pages/details/details"
-		},{
-			"path":"pages/onlineAdd/cars",
+			"path": "pages/details/details",
 			"style": {
-				"navigationBarTitleText": "在线补充车辆信息"
+				"navigationBarTitleText": "物资需求详情"
 			}
-		}
-	],
+		},{
+            "path" : "pages/addcar/addcar",
+            "style" : {
+				"navigationBarTitleText": "补充车辆"
+			}
+        },{
+            "path" : "pages/addhospital/addhospital",
+            "style" : {
+				"navigationBarTitleText": "补充医院"
+			}
+        }
+    ],
 	"globalStyle": {
 		// #ifdef H5
 		"navigationStyle": "custom",
 		// #endif
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "湖北医疗物资需求平台",
+		"navigationBarTitleText": "武汉物资信息",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}
