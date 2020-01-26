@@ -42,14 +42,14 @@
         </view>
         <view class="info-from">
             <text>医院地址：{{detail.province + detail.city + detail.area + detail.street}}</text>
-            <view class="info-person">
-                <view>
-                    <text>联系人：</text>
-                    <text v-for="(item,index) in detail.contacts">{{item.name}}</text>
-                </view>
-                <view>
-                    <button type="default" size="mini" @tap="callSomeOne(detail.contacts[0].phone)">联系医院</button>
-                </view>
+            <view class="info-person" v-for="(item,index) in detail.contacts" :key="index">
+            	<view>
+            		<text>联系人：</text>
+            		<text>{{item.name}}</text>
+            	</view>
+            	<view>
+            		<button type="default" size="mini" @tap="callSomeOne(item.phone)">联系医院</button>
+            	</view>
             </view>
         </view>
         <view class="item-redCross" v-if="detail.type !== '0'">
