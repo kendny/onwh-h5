@@ -31,42 +31,41 @@
 							<image :src="item" class="item-img" mode="widthFix"></image>
 						</swiper-item>	
 					</swiper> -->
-				<swiper v-if="files.length > 0" :style="{height: '600upx'}">
-					<swiper-item v-for="(item,index) in files">
+				<swiper v-if="files" :style="{height: '600upx'}">
+					<swiper-item>
 						<view class="item-box">
-							<text class="title">{{item.Hospital}}</text>
+							<text class="title">{{details.Hospital}}</text>
 							<view class="btns-box">
 								<view>
-									<button type="default" class="btn-address" size="mini">{{item.company1}}</button>
-									<button type="default" class="btn-address" size="mini">{{item.company2}}</button>
+									<button type="default" class="btn-address" size="mini">京东快递</button>
+									<button type="default" class="btn-address" size="mini">顺丰快递</button>
 								</view>
 								<view>
-									<button type="default" class="copy" size="mini" @tap="copyAddress(item.address)">复制快递地址</button>
+									<button type="default" class="copy" size="mini" @tap="copyAddress(files.province + files.city + files.area + files.street)">复制快递地址</button>
 								</view>
 							</view>
 							<view class="text-address">快递地址：</view>
-							<text class="text-address">{{item.address}}</text>
+							<text class="text-address">{{files.province + files.city + files.area + files.street}}</text>
 							<view class="touch-info">
-								<text>收件人：{{item.person}}</text>
-								<text>电话：{{item.phone}}</text>
+								<text>收件人：{{files.name}}</text>
+								<text>电话：{{files.phone}}</text>
 							</view>
 						</view>
 						<view class="item-box">
 							<view class="btns-box">
-								<text class="title">{{item.type}}</text>
+								<text class="title">{{files.dockingAddress}}</text>
 								<view>
-									<button type="default" class="call-phone" size="mini" @tap="callSomeOne(item.phone)">点击拨打电话</button>
+									<button type="default" class="call-phone" size="mini" @tap="callSomeOne(files.dockingerPhone)">点击拨打电话</button>
 								</view>
 							</view>
 							<view class="touch-info">
-								<text>收件人：{{item.person}}</text>
-								<text>电话：{{item.phone}}</text>
+								<text>收件人：{{files.dockinger}}</text>
+								<text>电话：{{files.dockingerPhone}}</text>
 							</view>
 						</view>
 					</swiper-item>
 				</swiper>
 				<view class="main-text" style="text-align: center;" v-else>暂无内容</view>
-
 			</swiper-item>
 		</swiper>
 	</view>
@@ -157,11 +156,11 @@
 				let params = {
 					'id': id
 				}
-
 				that.$api.getDemandDetail(params)
 					.then(res => {
 						if (res.code === '10000') {
 							that.details = res.data
+							that.files = res.data.receiptInfo
 						}
 					}).catch(err => {
 						console.log(err)

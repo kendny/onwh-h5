@@ -23,7 +23,7 @@
 							</view>
 						</view>
 						<view class="item-rights">
-							<view :class="['top-right',item.type == 0 ? '' : 'tip-active']">接受个人馈赠</view>
+							<view :class="['top-right',item.type == 0 ? '' : 'tip-active']">{{item.type == 0 ? '接受个人捐赠' : '不接受个人捐赠'}}</view>
 							<view class="text">来源：{{item.source ? item.source : '网络'}}</view>
 						</view>
 					</view>
@@ -92,7 +92,7 @@
 				<view class="model-item flex-between" v-for="(item,index) in callList" :key="index">
 					<text class="text">{{item.name}}</text>
 					<view class="phone-wrap">
-						<text class="copy-key" v-if="item.phone" @tap="copyKey(item.phone)">一键复制</text>
+						<text class="copy-key copy" v-if="item.phone" @tap="copyPhone(item.phone)">一键复制</text>
 						<text class="call-btn" v-if="item.phone" @tap="callSomeOne(item.phone)">拨打电话</text>
 						<text class="model-email" v-if="item.email" @tap="copy(item.email)">{{item.email}}</text>
 					</view>
@@ -105,6 +105,7 @@
 <script>
 	import PullScroll from '../../components/s-pull-scroll/index.vue'
 	import tabs from '../../components/yc_tabs/yc_tabs.vue'
+	import Clipboard from '../../utils/common/clipboard.min.js'
 	import {
 		Request
 	} from '../../utils/http.js'
@@ -157,43 +158,26 @@
 			};
 		},
 		methods: {
-			copy(email) {
-				uni.setClipboardData({
-					data: email,
-					success: function(res) {
-						uni.showToast({
-							title: '邮箱复制成功',
-							icon: none,
-							duration: 1500
-						})
-					},
-					fail: function() {
-						uni.showToast({
-							title: '邮箱复制失败',
-							icon: none,
-							duration: 1500
-						})
+			copyPhone(phone) {
+				let clipboard = new Clipboard('.copy', {
+					text: function() {
+						return phone;
 					}
 				});
-			},
-			copyKey(phone) {
-				console.log(phone, 'phone');
-				uni.setClipboardData({
-					data: phone,
-					success: function(res) {
-						uni.showToast({
-							title: '手机号复制成功',
-							icon: none,
-							duration: 1500
-						})
-					},
-					fail: function() {
-						uni.showToast({
-							title: '手机号复制失败',
-							icon: none,
-							duration: 1500
-						})
-					}
+				clipboard.on('success', function(e) { //复制成功执行的回调，可选
+					uni.showToast({
+						title: '电话复制成功',
+						icon: 'none',
+						duration: 1500
+					})
+				});
+				clipboard.on('error', function(e) { //复制失败执行的回调，可选
+					console.log(e);
+					uni.showToast({
+						title: '电话复制失败',
+						icon: 'none',
+						duration: 1500
+					})
 				});
 			},
 			handleModel(index) {
@@ -255,13 +239,9 @@
 					itemColor: '#007AFF',
 					success: function(res) {
 						if (res.tapIndex == 0) {
-							uni.makePhoneCall({
-								phoneNumber: phone //仅为示例
-							});
+							this.copyPhone();
 						} else if (res.tapIndex == 1) {
-							uni.showToast({
-								title: '复制微信'
-							})
+							this.copyPhone();
 						} else if (res.tapIndex == 2) {
 							console.log('补充医院页面')
 						} else if (res.tapIndex == 3) {
@@ -434,7 +414,7 @@
 						position: absolute;
 						right: 0upx;
 						top: 0;
-						width: 200upx;
+						width: 220upx;
 						display: flex;
 						align-items: center;
 						justify-content: center;
@@ -623,5 +603,18 @@
 		font-family: PingFangSC-Semibold;
 		font-size: 12px;
 		color: #FFFFFF;
+	}
+
+	.phone-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.copy-key {
+			padding-right: 20upx;
+			font-family: PingFangSC-Semibold;
+			font-size: 28upx;
+			color: #80ADED;
+		}
 	}
 </style>

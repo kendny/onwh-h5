@@ -14,20 +14,21 @@
 					</g>
 				</g>
 			</svg>
-			<text class="title-item"> 返回列表</text>
+			<text class="title-item">返回列表</text>
 		</view>
 		<view class="info-content">
 			<view class="main-box">
 				<text class="main-text">{{detail.company}}</text>
 				<view>
-					<button type="default" class="btn-donate" @tap="doSomething">接受个人捐赠</button>
+					<button type="default" :class="['btn-donate',detail.type == 0 ? '' : 'not-don']" @tap="doSomething">{{detail.type == 0 ? '接受个人捐赠' : '不接受个人捐赠'}}</button>
 				</view>
 			</view>
 			<view class="info-box">
-				<text class="main-time">{{detail.time || '2020-01-26 02:03'}}</text>
+				<text class="main-time">{{detail.createTime || '2020-01-26 02:03'}}</text>
 				<view class="touch-box">
-					<text class="come-text" @tap="toOut(detail.sourceUrl)">来源：官方微博</text>
-					<svg width="10px" height="18px" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<text class="come-text" @tap="toOut(detail.sourceUrl)">来源：{{detail.source}}</text>
+					<svg width="10px" height="18px" v-if="detail.sourceUrl" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					 xmlns:xlink="http://www.w3.org/1999/xlink">
 						<title>返回</title>
 						<desc>Created with Sketch.</desc>
 						<g stroke="none" stroke-width="1" fill="#999999" fill-rule="evenodd" transform="translate(30, 40)rotate(180)">
@@ -40,13 +41,13 @@
 		</view>
 		<view class="info-from">
 			<text>医院地址：{{detail.province + detail.city + detail.area + detail.street}}</text>
-			<view class="info-person">
+			<view class="info-person" v-for="(item,index) in detail.contacts" :key="index">
 				<view>
 					<text>联系人：</text>
-					<text v-for="(item,index) in detail.contacts">{{item.name}}</text>
+					<text>{{item.name}}</text>
 				</view>
 				<view>
-					<button type="default" size="mini" @tap="callSomeOne(detail.contacts[0].phone)">联系医院</button>
+					<button type="default" size="mini" @tap="callSomeOne(item.phone)">联系医院</button>
 				</view>
 			</view>
 		</view>
@@ -119,11 +120,15 @@
 				align-items: flex-end;
 
 				.btn-donate {
-					width: 200upx;
+					width: 240upx;
 					background: #FFC936;
 					border-radius: 0 0 4px 4px;
 					font-size: 24upx;
 					color: #FFFFFF;
+				}
+
+				.not-don {
+					background: #999 !important;
 				}
 			}
 
