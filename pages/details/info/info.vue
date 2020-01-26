@@ -11,7 +11,7 @@
 				<text class="call-btn" @tap="callSomeOne(detail.contacts[0].phone)">联系电话</text>
 			</view>
 		</view>
-		<view class="info-from flex-between" @tap="toOut(detail.sourceUrl)">
+		<view class="info-from flex-between" @tap="toOut(detail.sourceUrl)" v-if="detail.sourceUrl">
 			<text>来源：官方微博</text>
 			<text v-if="detail.sourceUrl"> > </text>
 		</view>
