@@ -114,6 +114,12 @@
 			PullScroll,
 			tabs
 		},
+		watch:{
+			company(value){
+				this.company = value
+				this.loadData(this.PullScroll, 1);
+			}
+		},
 		data() {
 			return {
 				placeholder: '请输入你要搜索的医院名称',
@@ -146,11 +152,13 @@
 				current: 0,
 				tabList: [{
 					title: '医院需求',
-					hasRed: false,
+					hasRed: true,
+					isShow: true,
 					num: '99+'
 				}, {
 					title: '车辆资源',
-					hasRed: false,
+					hasRed: true,
+					isShow: true,
 					num: 99
 				}],
 				isCity: -1,
@@ -158,15 +166,22 @@
 			};
 		},
 		methods: {
-			copyPhone(phone) {
+			copyPhone(phone, key) {
 				let clipboard = new Clipboard('.copy', {
 					text: function() {
 						return phone;
 					}
 				});
+				let index = key? key : '-1'
+				let toastMsg = ''
+				if(index==0){
+					toastMsg = "电话复制成功"
+				}else{
+					toastMsg = "微信号复制成功"
+				}
 				clipboard.on('success', function(e) { //复制成功执行的回调，可选
 					uni.showToast({
-						title: '电话复制成功',
+						title: toastMsg,
 						icon: 'none',
 						duration: 1500
 					})
@@ -174,7 +189,7 @@
 				clipboard.on('error', function(e) { //复制失败执行的回调，可选
 					console.log(e);
 					uni.showToast({
-						title: '电话复制失败',
+						title: toastMsg,
 						icon: 'none',
 						duration: 1500
 					})
@@ -234,14 +249,15 @@
 					})
 			},
 			showMore() {
+				let that = this
 				uni.showActionSheet({
 					itemList: ['拨打工作人员电话', '复制工作人员微信', '在线补充医院名单', '在线补充车辆名单'],
 					itemColor: '#007AFF',
 					success: function(res) {
 						if (res.tapIndex == 0) {
-							this.copyPhone();
+							that.copyPhone('112', res.tapIndex);
 						} else if (res.tapIndex == 1) {
-							this.copyPhone();
+							this.copyPhone('', res.tapIndex);
 						} else if (res.tapIndex == 2) {
 							uni.navigateTo({
 								url: '/pages/addhospital/addhospital'
