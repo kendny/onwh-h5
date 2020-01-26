@@ -155,8 +155,8 @@
 
 					.red-box {
 						position: absolute;
-						right: -10px;
-						top: 8px;
+						right: -15px;
+						top: 2px;
 						background-color: #F23030;
 						border-radius: 17upx;
 						padding: 4upx 12upx;

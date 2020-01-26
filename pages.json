@@ -14,7 +14,7 @@
 		},{
             "path" : "pages/addcar/addcar",
             "style" : {
-				"navigationBarTitleText": "补充车辆"
+				"navigationBarTitleText": "在线补充车辆名单"
 			}
         },{
             "path" : "pages/addhospital/addhospital",

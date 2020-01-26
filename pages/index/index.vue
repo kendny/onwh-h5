@@ -30,10 +30,22 @@
 					<view class="item-main">
 						<view class="item-more flex-between">
 							<text>急需物资类型</text>
-							<text class="more-main" @tap="toDetails(item.id)">更多详情</text>
+							<view>
+								<text class="more-main" @tap="toDetails(item.id)">更多详情</text>
+								<svg style="position: absolute; margin: 5rpx 0rpx 10rpx -24rpx;" width="10px" height="18px" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+								    xmlns:xlink="http://www.w3.org/1999/xlink">
+								    <title>返回</title>
+								    <desc>Created with Sketch.</desc>
+								    <g stroke="none" stroke-width="1" fill="#999999" fill-rule="evenodd" transform="translate(30, 40)rotate(180)">
+								        <path d="M26,27.9703032 L17.3690593,36.7610719 C17.0543445,37.0817458 16.5454834,37.0793158 16.2331535,36.7556718 C15.9208236,36.4310378 15.9229435,35.9107414 16.2378349,35.5886274 L23.7139675,27.9745332 L16.2396015,20.4131798 C15.9233851,20.0921458 15.9196753,19.5716693 16.231387,19.2461353 C16.5392121,18.9240213 17.0448933,18.9171813 17.3610214,19.2308351 C17.3631413,19.2329052 17.3652612,19.2349752 17.3672927,19.2371352 L26,27.9703032 Z"
+								            id="返回" transform="translate(21.000000, 28.000000) scale(-1, 1) translate(-21.000000, -28.000000) "></path>
+								    </g>
+								</svg>
+							</view>
+							
 						</view>
 						<view class="item-content">
-							<view class="item-wuzi flex-between" v-for="(child,idx) in item.details" :key="idx">
+							<view class="item-wuzi flex-between" v-for="(child,idx) in item.details" :key="idx" v-if="idx<=2">
 								<text class="text">{{child.name}}</text>
 								<text v-if="child.amount > 0">{{child.amount}} / {{child.unit}}</text>
 								<text v-else>不限</text>
@@ -85,7 +97,7 @@
 			<image src="../../static/logo.png" mode="widthFix" class="us-img"></image>
 			<view class="call-btns">us</view>
 		</view> -->
-		<view class="bottom-btn" @tap="showMore">车辆资源需要补充，点这里与工作人员联系添加</view>
+		<view class="bottom-btn" @tap="showMore">医院和车辆资源需要补充，点这里与工作人员联系添加</view>
 		<!-- <view class="more-func"></view> -->
 		<view class="model-wrap" v-if="showModel" @tap="hideModel">
 			<view class="model">
@@ -159,7 +171,7 @@
 					title: '车辆资源',
 					hasRed: true,
 					isShow: true,
-					num: 99
+					num: '99+'
 				}],
 				isCity: -1,
 				cityList: ["武汉", "荆州", "黄石", "宜昌"]
@@ -225,11 +237,13 @@
 				} else {
 					this.placeholder = '请输入你要搜索的车辆信息'
 				}
+				this.company = ''
 				this.$refs.tab.tabToIndex(current);
 				this.loadData(this.PullScroll, 1);
 			},
 			checkCity(index) {
 				this.isCity = index;
+				this.company = ''
 				if (index == -1) {
 					this.city = ''
 				} else {
@@ -251,7 +265,8 @@
 			showMore() {
 				let that = this
 				uni.showActionSheet({
-					itemList: ['拨打工作人员电话', '复制工作人员微信', '在线补充医院名单', '在线补充车辆名单'],
+					/* '拨打工作人员电话', '复制工作人员微信', */ 
+					itemList: ['在线补充医院名单', '在线补充车辆名单'],
 					itemColor: '#007AFF',
 					success: function(res) {
 						if (res.tapIndex == 0) {
@@ -302,7 +317,6 @@
 			},
 			loadData(pullScroll, index) {
 				let that = this;
-
 				let params = {
 					pageSize: 10,
 					start: index,
@@ -436,7 +450,7 @@
 						position: absolute;
 						right: 0upx;
 						top: 0;
-						width: 220upx;
+						width: 210upx;
 						display: flex;
 						align-items: center;
 						justify-content: center;
@@ -473,6 +487,7 @@
 						flex-direction: column;
 
 						.item-name {
+							width: 500upx;
 							font-family: PingFangSC-Semibold;
 							font-weight: 600;
 							font-size: 28upx;
@@ -498,8 +513,9 @@
 					height: 76upx;
 					color: #333;
 					font-size: 28upx;
-
+					
 					.more-main {
+						margin-right: 30rpx;
 						color: var(--mainColor);
 					}
 				}
@@ -537,8 +553,11 @@
 
 			.item-info {
 				font-family: PingFangSC-Semibold;
+				background-color: #FFFFFF;
 				font-size: 24upx;
 				color: #333333;
+				height: auto;
+				padding-bottom: 15rpx;
 			}
 		}
 	}

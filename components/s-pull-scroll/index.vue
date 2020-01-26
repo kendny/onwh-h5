@@ -662,6 +662,7 @@ export default {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s linear;
+	bottom: 60rpx;
     &.show {
       opacity: 1;
       pointer-events: auto;
