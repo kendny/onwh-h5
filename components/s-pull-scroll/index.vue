@@ -670,7 +670,7 @@ export default {
   .default-back-top {
     position: fixed;
     right: 20rpx;
-    bottom: calc(var(--window-bottom) + 15rpx);
+    bottom: calc(var(--window-bottom) + 120rpx);
 
     img {
       width: 72rpx;
