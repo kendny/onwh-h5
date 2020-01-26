@@ -4,7 +4,7 @@
 			<scroll-view :scroll-x="true" style="white-space: nowrap; display: flex;" scroll-with-animation :scroll-left="slider.scrollLeft">
 				<view class="item-box">
 					<block v-for="(item, index) in tabList" :key="index">
-						<view class="item" :class="{ active: activeIndex === index }" :id="'tab_'+index" @click="tabClick(index)">
+						<view class="item" v-if="item.isShow" :class="{ active: activeIndex === index }" :id="'tab_'+index" @click="tabClick(index)">
 							{{ item.title }}
 							<view class="red-box" v-show="item.hasRed" v-text="item.num"></view>
 						</view>
