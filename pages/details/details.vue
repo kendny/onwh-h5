@@ -25,8 +25,8 @@
                 </view>
             </swiper-item>
             <!-- 物资运输方式 -->
-            <swiper-item class="item-wraps" v-if="details.receiptInfo">
-                <swiper :style="{height: '600upx'}">
+            <swiper-item class="item-wraps">
+                <swiper  v-if="details.receiptInfo" :style="{height: '600upx'}">
                     <swiper-item>
                         <view class="item-box">
                             <text class="title">{{details.receiptInfo.dockingAddress}}</text>
@@ -60,7 +60,7 @@
                         </view>
                     </swiper-item>
                 </swiper>
-                <!-- <view class="main-text" style="text-align: center;" v-else>暂无内容</view> -->
+                <view class="main-text" style="text-align: center;" v-else>暂无内容</view>
             </swiper-item>
         </swiper>
     </view>
