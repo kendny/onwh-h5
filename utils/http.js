@@ -10,7 +10,7 @@ const global = {
 		let token = uni.getStorageSync('token');
 		let header = {
 			'content-type': 'application/json',
-			'accessToken': token || undefined
+			'accessToken': undefined
 		};
 		uni.request({
 			url: (isThird ? `${url}` : `${URL_PREV}${url}`),

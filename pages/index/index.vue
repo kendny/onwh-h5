@@ -577,21 +577,6 @@
 					color: #666666;
 				}
 
-				.phone-wrap {
-					display: flex;
-					flex-direction: row;
-					justify-content: center;
-					align-items: center;
-				}
-
-				.copy-key {
-					font-family: PingFangSC-Semibold;
-					color: var(--mainColor);
-					font-size: 32upx;
-					text-align: right;
-					margin-right: 10px;
-				}
-
 				.model-email {
 					color: var(--mainColor);
 					font-family: PingFangSC-Semibold;
