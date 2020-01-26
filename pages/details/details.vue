@@ -4,7 +4,7 @@
         <view class="detail-head">
             <tabs ref="tab" :tabData="tabList" :defaultIndex="current" @tabClick='tabClick'></tabs>
         </view>
-        <swiper class="swiper" :current="current" @change="tabClick" :style="{height: '60vh'}">
+        <swiper class="swiper" :current="current" @change="tabClick" :style="{minHeight: '51vh'}">
             <!-- 需求物资清单 -->
             <swiper-item>
                 <view class="item-wrap">
@@ -140,9 +140,9 @@
             },
             // 打电话功能
             callSomeOne(phone) {
-            	uni.makePhoneCall({
-            		phoneNumber: phone //仅为示例
-            	});
+                uni.makePhoneCall({
+                    phoneNumber: phone //仅为示例
+                });
             },
             tabClick(e) {
                 let current = typeof e === 'object' ? e.detail.current : e;
@@ -177,21 +177,25 @@
 <style lang="less" scoped>
     .detail-wrap {
         background-color: #EDEDED;
+
         .detail-head {
             border-bottom: 1px solid #C0C0C0;
         }
     }
+
     .item-wraps {
         box-sizing: border-box;
         background-color: #FFFFFF;
         padding: 20upx 20upx;
     }
+
     .item-wrap {
         box-sizing: border-box;
         background-color: #FFFFFF;
         padding: 0 20upx;
     }
-    .swiper{
+
+    .swiper {
         background-color: #FFFFFF;
     }
 
@@ -199,7 +203,7 @@
         display: flex;
         align-items: center;
         border-bottom: 1upx solid #f2f2f2;
-        font-family:  PingFangSC-Semibold;
+        font-family: PingFangSC-Semibold;
         font-size: 24upx;
         color: #333333;
         height: 72upx;
@@ -217,6 +221,7 @@
         padding: 20upx 20upx;
         color: #333333;
         margin-bottom: 20upx;
+
         .title {
             margin-bottom: 7upx;
             display: block;
@@ -264,11 +269,15 @@
                 margin-right: 84upx;
             }
         }
-        .call-phone{
+
+        .call-phone {
             background: #FFFFFF;
             border: 1px solid #80ADED;
             border-radius: 50upx;
             color: #80ADED;
+        }
+        uni-button:after {
+            border: none;
         }
     }
 
@@ -276,4 +285,5 @@
         width: 80%;
         margin: 0 auto;
     }
+
 </style>

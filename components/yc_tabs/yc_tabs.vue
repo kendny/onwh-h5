@@ -133,9 +133,9 @@
 			width: 100%;
 
 			.item-box {
-				display: flex;
-				align-items: center;
-				justify-content: space-around;
+				// display: flex;
+				// align-items: center;
+				// justify-content: space-around;
 
 				.item {
 					position: relative;
