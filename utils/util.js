@@ -68,7 +68,7 @@ module.exports = {
 
     showModal: function (content) {
         uni.showModal({
-            title: '红远物流提醒',
+            title: '提示消息',
             content: content,
             showCancel: false,
             success(res) {

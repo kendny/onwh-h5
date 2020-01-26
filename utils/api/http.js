@@ -51,6 +51,7 @@ http.interceptor.request((config, cancel) => {
         })
         _showLoading = true;
     }
+	console.log('config:===', config)
     return config
 
 })
