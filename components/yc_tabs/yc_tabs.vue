@@ -95,11 +95,15 @@
 				const query = uni.createSelectorQuery().in(this);
 				query.select('#tab_' + index).boundingClientRect((res) => {
 					let _prev_slider = this.tabListSlider[index - 1];
+					if(!res){
+						return
+					}
 					this.tabListSlider[index] = {
 						left: res.left - this.box.left,
 						width: res.width,
 						scrollLeft: res.left - this.box.left - (_prev_slider ? _prev_slider.width : 0),
 					}
+					
 					if (this.activeIndex == index) {
 						this.tabToIndex(this.activeIndex);
 					}
@@ -120,22 +124,23 @@
 		display: flex;
 		background: #fff;
 		font-size: 28upx;
-		// box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
 		position: relative;
 		z-index: 10;
 		overflow: hidden;
 
-		.active {
-			color: var(--mainColor) !important;
-		}
+		// .active {
+		// 	color: var(--mainColor) !important;
+			
+		// }
 
 		.horizontal {
 			width: 100%;
 
 			.item-box {
-				// display: flex;
-				// align-items: center;
-				// justify-content: space-around;
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
 
 				.item {
 					position: relative;
