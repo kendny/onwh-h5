@@ -16,5 +16,9 @@ export default {
 	// 提交车辆信息
 	postCarInfo: params => {
 		return http.post(`${host}car/applyResource/`, params)
+	},
+	// 提交医院信息
+	postHospitalInfo: params => {
+		return http.post(`${host}demand/`, params)
 	}
 }
