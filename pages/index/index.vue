@@ -114,7 +114,12 @@
 			PullScroll,
 			tabs
 		},
-		
+		watch:{
+			company(value){
+				this.company = value
+				this.loadData(this.PullScroll, 1);
+			}
+		},
 		data() {
 			return {
 				placeholder: '请输入你要搜索的医院名称',
